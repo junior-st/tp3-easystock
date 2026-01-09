@@ -15,6 +15,8 @@ public:
 	bool ajouterUnProduit(const Produit& p1);
 	void produitRefenceMagasin() const;
 	void produitSpecifique(std::string nom_produit);
+	void miseAjourQuantite(std::string nom_produit,int updateQuantite);
+	std::vector<Produit> getProduitMagasin()const;
 
 };
 
