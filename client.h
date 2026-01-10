@@ -19,6 +19,7 @@ public:
 	void miseAjourQuantitePanier(std::string nom_produit, int updateQuantite);
 	bool supprimerUnproduit(const Produit& p);
 	std::string afficherProduitPanier()const;
+	bool operator == (const Client& other_client)const;
 };
 
 std::ostream& operator << (std::ostream& os,const Client& C);

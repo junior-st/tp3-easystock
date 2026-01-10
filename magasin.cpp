@@ -103,3 +103,15 @@ void Magasin::miseAjourQuantiteProduit(Client& client_panier_update,Produit& p, 
 {
 	client_panier_update.miseAjourQuantitePanier(p.getTitreArticle(), nouvelle_quantite);
 }
+
+std::string Magasin::validattionPanier(const Commande& commande_a_valider)
+{
+	auto it = std::find_if(commandes_.begin(), commandes_.end(), [&commande_a_valider](const Commande& c) {
+		return c.getProprietaireCommande() == commande_a_valider.getProprietaireCommande();});
+	if (it != commandes_.end()) {
+		it->setEtatdeLivraison();
+		it->getProrietaireCommade().flushPanierAchat();
+		return "commande valide avec succes ";
+	}
+	  return "cette commande n'a pas ete valider car pas dans le panier de commande";
+}

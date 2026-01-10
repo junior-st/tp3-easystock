@@ -10,8 +10,11 @@ private:
 public:
 	Commande(Client& client,std::vector<Produit> panier_commande = {});
 	Client getProprietaireCommande()const;
+	Client& getProrietaireCommade();
 	std::vector<Produit> getPanierCommande()const;
 	std::string getEtatLivraison()const;
+	void setEtatdeLivraison();
+	bool operator == (const Commande& other_commande)const;
 };
 std::ostream& operator << (std::ostream& os, const Commande& Com);
 

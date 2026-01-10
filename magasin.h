@@ -24,6 +24,7 @@ public:
 	void ajouterProduitPanier(Client& client_panier_ajout,Produit& produit);
 	void retirerProduitPAnier(Client& client_panier_retiere, Produit& produit);
 	void miseAjourQuantiteProduit(Client& client_panier_update,Produit& p,int nouvelle_quantite);
+	std::string validattionPanier(const Commande& commande_a_valider);
 
 
 };

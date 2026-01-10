@@ -73,9 +73,15 @@ std::string Client::afficherProduitPanier() const
 {
     std::string liste_produit = "";
     for (Produit p : panier_de_achat_) {
-        liste_produit = "-" + p.getTitreArticle() + " -----X " + std::to_string(p.getQuantiteDisponible()) +"\n";
+        liste_produit += "-" + p.getTitreArticle() + " -----X " + std::to_string(p.getQuantiteDisponible()) +"\n";
     }
     return liste_produit;
+}
+
+bool Client::operator == (const Client& other_client)const
+{
+    return nom_ == other_client.getNom() && prenom_ == other_client.getPrenom() &&
+        identifiant_unique_==other_client.getIdentifiantUnique();
 }
 
 std::ostream& operator<<(std::ostream& os, const Client& c)
