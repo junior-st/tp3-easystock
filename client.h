@@ -17,6 +17,10 @@ public:
 	bool ajouterAuPAnier(const Produit& p);
 	void flushPanierAchat();
 	void miseAjourQuantitePanier(std::string nom_produit, int updateQuantite);
+	bool supprimerUnproduit(const Produit& p);
+	std::string afficherProduitPanier()const;
 };
+
+std::ostream& operator << (std::ostream& os,const Client C);
 
 

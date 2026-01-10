@@ -17,6 +17,14 @@ public:
 	void produitSpecifique(std::string nom_produit);
 	void miseAjourQuantite(std::string nom_produit,int updateQuantite);
 	std::vector<Produit> getProduitMagasin()const;
+	void ajouterClient(const Client& client_ajouter);
+	void afficherLesClient()const;
+	bool afficherClient(std::string nom);
+	bool afficherClient(int identifiant_unique);
+	void ajouterProduitPanier(Client& client_panier_ajout,Produit& produit);
+	void retirerProduitPAnier(Client& client_panier_retiere, Produit& produit);
+	void miseAjourQuantiteProduit(Client& client_panier_update,Produit& p,int nouvelle_quantite);
+
 
 };
 
