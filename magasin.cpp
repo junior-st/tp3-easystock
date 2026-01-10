@@ -59,7 +59,7 @@ void Magasin::afficherLesClient() const
 	for (auto client : clients_) {
 		std::cout << "========================================" << std::endl;
 		std::cout << client << std::endl;
-		std::cout << "========================================" << std::endl;
+		std::cout << "=========================================" << std::endl;
 	}
 }
 
