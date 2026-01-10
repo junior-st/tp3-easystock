@@ -4,7 +4,7 @@
 class Commande
 {
 private:
-	Client proprietaire_commande_;
+	Client& proprietaire_commande_;
 	std::vector<Produit> panier_commande_;
 	std::string etat_ = "pas liver";
 public:

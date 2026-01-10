@@ -16,6 +16,8 @@ public:
 	int getQuantiteDisponible()const;
 	double getPrixUnitaire()const;
 	void setQuantiteDisponible(int updateQuantite);
+	bool operator==(const Produit& other) const;
+
 	
 };
 std::ostream& operator << (std::ostream& os, const Produit& p);

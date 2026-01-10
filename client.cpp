@@ -2,9 +2,10 @@
 #include "magasin.h"
 #include "produit.h"
 #include <stdexcept>
+#include <algorithm>
 
 Client::Client(std::string nom, std::string prenom, int identifiant_unique, std::vector<Produit> panier_de_achat):
-    nom_(nom),prenom_(prenom),identifiant_unique_(identifiant_unique_)
+    nom_(nom),prenom_(prenom),identifiant_unique_(identifiant_unique)
 {
     if (nom.empty() || prenom.empty()) {
         throw std::invalid_argument("le nom et prenom ne peuvent etre vide");
@@ -48,11 +49,11 @@ void Client::flushPanierAchat()
 void Client::miseAjourQuantitePanier(std::string nom_produit, int updateQuantite)
 {
     auto it = std::find_if(panier_de_achat_.begin(),panier_de_achat_.end(), [nom_produit](const Produit& p)
-        {p.getTitreArticle() == nom_produit; });
+        { return p.getTitreArticle() == nom_produit; });
     if (it != panier_de_achat_.end()) {
         if (updateQuantite >= 0) {
-            auto produit = *it;
-            produit.setQuantiteDisponible(updateQuantite);
+           
+            it->setQuantiteDisponible(updateQuantite);
         }
     }
 }
@@ -72,16 +73,16 @@ std::string Client::afficherProduitPanier() const
 {
     std::string liste_produit = "";
     for (Produit p : panier_de_achat_) {
-        liste_produit = "-" + p.getTitreArticle() + " -----X " + std::to_string(p.getQuantiteDisponible()) +"/n";
+        liste_produit = "-" + p.getTitreArticle() + " -----X " + std::to_string(p.getQuantiteDisponible()) +"\n";
     }
     return liste_produit;
 }
 
-std::ostream& operator<<(std::ostream& os, const Client c)
+std::ostream& operator<<(std::ostream& os, const Client& c)
 {
-    os << "-" + c.getNom() + "/n" +
-        "-" + c.getPrenom() + "/n" +
-        "-" + std::to_string(c.getIdentifiantUnique()) + "/n"
+    os << "-" + c.getNom() + "\n" +
+        "-" + c.getPrenom() + "\n" +
+        "-" + std::to_string(c.getIdentifiantUnique()) + "\n"
         + "panier d'achat:"+c.afficherProduitPanier();
 
     return os;

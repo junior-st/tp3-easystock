@@ -1,10 +1,4 @@
 #include <iostream>
-#include "magasin.h"
 int main() {
-
-
-
-
-
-	return 0;
+return 0;
 }

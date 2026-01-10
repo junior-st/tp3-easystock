@@ -1,5 +1,11 @@
 #include "magasin.h"
 #include "produit.h"
+#include <algorithm>
+
+Magasin::Magasin(std::vector<Produit> produit, std::vector<Client> clients, std::vector<Commande> commandes):
+	produit_(produit),clients_(clients),commandes_(commandes)
+{//rien a faire ici :)
+}
 
 bool Magasin::ajouterUnProduit(const Produit& p1) {
 	produit_.push_back(p1);
@@ -16,7 +22,7 @@ void Magasin::produitRefenceMagasin() const
 
 void Magasin::produitSpecifique(std::string nom_produit)
 {
-	auto it = std::find_if(produit_.begin(), produit_.end(), [nom_produit](const Produit& p) {p.getTitreArticle() == nom_produit; });
+	auto it = std::find_if(produit_.begin(), produit_.end(), [nom_produit](const Produit& p) {return p.getTitreArticle() == nom_produit; });
 	if (it != produit_.end()) {
 		std::cout << *it;
 	}
@@ -29,11 +35,11 @@ void Magasin::produitSpecifique(std::string nom_produit)
 void Magasin::miseAjourQuantite(std::string nom_produit,int updateQuantite)
 {
 	auto it = std::find_if(produit_.begin(), produit_.end(), [nom_produit](const Produit& p) 
-		{p.getTitreArticle() == nom_produit; });
+		{return p.getTitreArticle() == nom_produit; });
 	if (it != produit_.end()) {
 		if (updateQuantite >= 0) {
-			auto produit = *it;
-			produit.setQuantiteDisponible(updateQuantite);
+			
+			it->setQuantiteDisponible(updateQuantite);
 		}
 	}
 }
@@ -59,7 +65,7 @@ void Magasin::afficherLesClient() const
 
 bool Magasin::afficherClient(std::string nom)
 {
-	auto it = std::find_if(clients_.begin(), clients_.end(), [nom](const Client& c) {nom == c.getNom(); });
+	auto it = std::find_if(clients_.begin(), clients_.end(), [nom](const Client& c) {return nom == c.getNom(); });
 	if (it != clients_.end()) {
 		std::cout << *it << std::endl;
 		return 1;
@@ -71,7 +77,7 @@ bool Magasin::afficherClient(std::string nom)
 bool Magasin::afficherClient(int identifiant_unique)
 {
 	auto it = std::find_if(clients_.begin(), clients_.end(), [identifiant_unique](const Client& c)
-		{identifiant_unique == c.getIdentifiantUnique(); });
+		{return identifiant_unique == c.getIdentifiantUnique(); });
 	if (it != clients_.end()) {
 		std::cout << *it << std::endl;
 		return 1;

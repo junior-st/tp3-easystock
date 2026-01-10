@@ -1,5 +1,5 @@
 #pragma once
-#include "produit.cpp"
+#include "produit.h"
 #include <vector>
 class Client
 {
@@ -21,6 +21,6 @@ public:
 	std::string afficherProduitPanier()const;
 };
 
-std::ostream& operator << (std::ostream& os,const Client C);
+std::ostream& operator << (std::ostream& os,const Client& C);
 
 

@@ -1,11 +1,12 @@
 #include "produit.h"
 #include <stdexcept>
+#include <algorithm>
 
 Produit::Produit(std::string titre_article, std::string description, int quantite, double prix_unitaire):
 	titre_article_(titre_article),description_(description),quantite_disponible_(quantite),
 	prix_unitaire_(prix_unitaire)
 {
-	if (titre_article.empty() || prix_unitaire == 0 ||quantite<0) {
+	if (titre_article.empty() || prix_unitaire == 0 || quantite<0) {
 		throw std::invalid_argument("titre vide ou prix unitaire non valide");
 	}
 }
@@ -33,6 +34,11 @@ void Produit::setQuantiteDisponible(int updateQuantite)
 	if (updateQuantite > 0) {
 		quantite_disponible_ = updateQuantite;
 	}
+}
+
+bool Produit::operator==(const Produit& other) const
+{
+	return titre_article_==other.getTitreArticle() && description_==other.getDescription() && prix_unitaire_==other.getPrixUnitaire() ;
 }
 
 std::ostream& operator << (std::ostream& os, const Produit& p)

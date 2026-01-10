@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="easystoretp3_.vcxproj" />
+  <Project Path="easystoretp3_.vcxproj" Id="dcb3dbe5-2580-469e-9c2e-c899df4cfc24" />
 </Solution>
