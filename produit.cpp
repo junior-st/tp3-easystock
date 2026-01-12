@@ -16,7 +16,7 @@ std::string Produit::getTitreArticle()const{
 
 std::string Produit::getDescription() const
 {
-	return description_+titre_article_+" "+std::to_string(prix_unitaire_);
+	return description_;
 }
 
 int Produit::getQuantiteDisponible() const
@@ -43,8 +43,8 @@ bool Produit::operator==(const Produit& other) const
 
 std::ostream& operator << (std::ostream& os, const Produit& p)
 {
-	os << p.getDescription()+p.getTitreArticle()+" prix unitaire " + std::to_string(p.getPrixUnitaire())+" $"
-		" quantite disponible "+std::to_string(p.getQuantiteDisponible());
+	os << p.getTitreArticle()+" |" + p.getDescription() + " | prix unitaire " + std::to_string(p.getPrixUnitaire()) + " euros"
+		" | quantite disponible: " +std::to_string(p.getQuantiteDisponible());
 	return os;
 }
 
