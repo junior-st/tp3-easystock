@@ -4,6 +4,7 @@
 #include "commande.h"
 #include "magasin.h"
 #include <limits>
+#include <fstream>
 
 
 
@@ -15,9 +16,24 @@ int main() {
 	Produit pain("pain", "un pain ideale pour la croissance", 25, 1.30);
 	Produit lait("lait", "lait caille Nido", 75, 1.10);
 	Produit savon("savon de marseille", "savon tout usage", 20, 0.5);
-	Produit jouet("voiture", "voiture patPAtrouille", 40, 45.0);
+	Produit jouet("voiture", "voiture pat patrouille", 40, 45.0);
 	Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);
 	std::vector<Produit> produits = { biscuit,gel,pain,lait,savon,jouet,chocolat };
+	std::fstream produit;
+	produit.open("produit.csv", std::ios::app);
+	if (produit.is_open()) {
+		for (const auto& p : produits) {
+			produit << '"' << p.getTitreArticle() << '"' << "," << '"' << p.getDescription() << '"' << ","<< p.getPrixUnitaire()<< ","
+				<< p.getQuantiteDisponible()<< "\n";
+		}
+		produit.close();
+
+	}
+	produit.open("produit.csv", std::ios::in);
+	if (produit.is_open()) {
+		std::string line;
+
+	}
 	//creation de client 
 	Client client1("chakoutio", "junior", 0);
 	Client client2("nguewo", "rose", 1);
