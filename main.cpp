@@ -12,7 +12,7 @@ int main() {
 //creation de produits
 	Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
 	Produit gel("gel nivea", "gel de nettoyage masculin ", 30, 5.55);
-	Produit pain("pain tradition", "un pain ideale pour la croissance", 25, 1.30);
+	Produit pain("pain", "un pain ideale pour la croissance", 25, 1.30);
 	Produit lait("lait", "lait caille Nido", 75, 1.10);
 	Produit savon("savon de marseille", "savon tout usage", 20, 0.5);
 	Produit jouet("voiture", "voiture patPAtrouille", 40, 45.0);
@@ -44,9 +44,9 @@ int main() {
 	int p;
 	std::cin >> p;
 	if (p == 1) {
-		std::cout << "1-ajouter un produit \n";
-		std::cout << "2-affichages des produits \n";
-		std::cout << "3-Mise a jour quantite produits \n";
+		std::cout << "1-ajouter un produit " << std::endl;;
+		std::cout << "2-affichages des produits "<<std::endl;
+		std::cout << "3-Mise a jour quantite produits "<<std::endl;
 		std::cout << "entrez le numero de l'action que vous souhaitez realiser : ";
 		std::cout << "====================================" << std::endl;
 		int x;
@@ -55,23 +55,43 @@ int main() {
 			easystock.produitRefenceMagasin();
 		}
 		else if (x == 1) {
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "entrez le non du produit " << std::endl;
-			std::string nom_produit;
-			std::getline(std::cin, nom_produit);
-			std::cout << "entrez la description du produit " << std::endl;
-			std::string description;
-			std::getline(std::cin, description);
-			std::cout << "entrez le stock disponible  " << std::endl;;
-			int stock;
-			std::cin >> stock;
-			std::cout << "entrez le prix unitaire  " << std::endl;
-			double prix;
-			std::cin >> prix;
-			Produit nouveau_produit(nom_produit, description, stock, prix);
-			easystock.ajouterUnProduit(nouveau_produit);
-			std::cout << "produit ajouter :)";
+			try {
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << "entrez le non du produit " << std::endl;
+				std::string nom_produit;
+				std::getline(std::cin, nom_produit);
+				std::cout << "entrez la description du produit " << std::endl;
+				std::string description;
+				std::getline(std::cin, description);
+				std::cout << "entrez le stock disponible  " << std::endl;;
+				int stock;
+				std::cin >> stock;
+				std::cout << "entrez le prix unitaire  " << std::endl;
+				double prix;
+				std::cin >> prix;
+				Produit nouveau_produit(nom_produit, description, stock, prix);
+				easystock.ajouterUnProduit(nouveau_produit);
+
+
+			}
+			catch (const std::invalid_argument& e) {
+				std::cerr << " erreur de creation du produit:" << e.what() << std::endl;
+			}
+			
 			easystock.produitRefenceMagasin();
+		}
+		else if (x==3){
+			std::cout << "quelle produit souhaiter vous mettre la quantite a jour" << std::endl;
+			std::string produit_a_mettre_a_jour;
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::getline(std::cin, produit_a_mettre_a_jour);
+			std::cout << " entrez la quantite " << std::endl;
+			int quantite_a_mettre_a_jour;
+			std::cin >> quantite_a_mettre_a_jour;
+			easystock.miseAjourQuantite(produit_a_mettre_a_jour, quantite_a_mettre_a_jour);
+			easystock.produitRefenceMagasin();
+
+
 
 		}
 	}

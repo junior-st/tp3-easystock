@@ -32,9 +32,9 @@ void Magasin::produitSpecifique(std::string nom_produit)
 
 }
 
-void Magasin::miseAjourQuantite(std::string nom_produit,int updateQuantite)
+void Magasin::miseAjourQuantite(const std::string& nom_produit,int updateQuantite)
 {
-	auto it = std::find_if(produit_.begin(), produit_.end(), [nom_produit](const Produit& p) 
+	auto it = std::find_if(produit_.begin(), produit_.end(), [&nom_produit](const Produit& p) 
 		{return p.getTitreArticle() == nom_produit; });
 	if (it != produit_.end()) {
 		if (updateQuantite >= 0) {

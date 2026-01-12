@@ -7,7 +7,7 @@ Produit::Produit(std::string titre_article, std::string description, int quantit
 	prix_unitaire_(prix_unitaire)
 {
 	if (titre_article.empty() || prix_unitaire == 0 || quantite<0) {
-		throw std::invalid_argument("titre vide ou prix unitaire non valide");
+		throw std::invalid_argument(" titre vide ou prix unitaire non valide");
 	}
 }
 std::string Produit::getTitreArticle()const{
