@@ -5,10 +5,7 @@
 #include "magasin.h"
 #include <limits>
 #include <fstream>
-
-
-
-
+#include <sstream>
 int main() {
 //creation de produits
 	Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
@@ -19,21 +16,8 @@ int main() {
 	Produit jouet("voiture", "voiture pat patrouille", 40, 45.0);
 	Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);
 	std::vector<Produit> produits = { biscuit,gel,pain,lait,savon,jouet,chocolat };
-	std::fstream produit;
-	produit.open("produit.csv", std::ios::app);
-	if (produit.is_open()) {
-		for (const auto& p : produits) {
-			produit << '"' << p.getTitreArticle() << '"' << "," << '"' << p.getDescription() << '"' << ","<< p.getPrixUnitaire()<< ","
-				<< p.getQuantiteDisponible()<< "\n";
-		}
-		produit.close();
-
-	}
-	produit.open("produit.csv", std::ios::in);
-	if (produit.is_open()) {
-		std::string line;
-
-	}
+	//lecture des fichiers csv brick by brick
+	
 	//creation de client 
 	Client client1("chakoutio", "junior", 0);
 	Client client2("nguewo", "rose", 1);
@@ -44,12 +28,29 @@ int main() {
 	//creation d'un vector de commande vide ;
 	std::vector<Commande> commandes = {};
 	Magasin easystock(produits, clients, commandes);
+	std::ifstream file;
+	file.open("produit.csv");
+	if (file.is_open()) {
+		std::string ligne;
+		while (std::getline(file, ligne)) {
+			std::stringstream ss(ligne);
+			std::string article;
+			std::string description;
+			std::string quantite;
+			std::string prix;
+			std::getline(ss, article, ',');
+			std::getline(ss, description, ',');
+			std::getline(ss, quantite, ',');
+			std::getline(ss, prix, ',');
+			int q = std::stoi(quantite);
+			double p = std::stod(prix);
+			Produit nouveau(article, quantite, q, p);
+			easystock.ajouterUnProduit(nouveau);
+		}
 
+		file.close();
+	}
 
-
-
-
-	
 	std::cout<<"====================================" << std::endl;
 	std::cout << "       Menu gestion de magasin      " << std::endl;
 	std::cout << "1-gestion du magasin  " << std::endl;
