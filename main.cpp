@@ -8,23 +8,23 @@
 #include <sstream>
 int main() {
 //creation de produits
-	Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
+	/*Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
 	Produit gel("gel nivea", "gel de nettoyage masculin ", 30, 5.55);
 	Produit pain("pain", "un pain ideale pour la croissance", 25, 1.30);
 	Produit lait("lait", "lait caille Nido", 75, 1.10);
 	Produit savon("savon de marseille", "savon tout usage", 20, 0.5);
 	Produit jouet("voiture", "voiture pat patrouille", 40, 45.0);
-	Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);
-	std::vector<Produit> produits = { biscuit,gel,pain,lait,savon,jouet,chocolat };
+	Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);*/
+	std::vector<Produit> produits = {};
 	//lecture des fichiers csv brick by brick
 	
 	//creation de client 
-	Client client1("chakoutio", "junior", 0);
+	/*Client client1("chakoutio", "junior", 0);
 	Client client2("nguewo", "rose", 1);
 	Client client3("nanmegni", "Alain", 2);
 	Client client4("keti", "sorelle", 3);
-	Client client5("tonfeu", "styve", 0);
-	std::vector<Client> clients = { client1,client2,client3,client4,client5 };
+	Client client5("tonfeu", "styve", 0);*/
+	std::vector<Client> clients = {};
 	//creation d'un vector de commande vide ;
 	std::vector<Commande> commandes = {};
 	Magasin easystock(produits, clients, commandes);
@@ -44,7 +44,7 @@ int main() {
 			std::getline(ss, prix, ',');
 			int q = std::stoi(quantite);
 			double p = std::stod(prix);
-			Produit nouveau(article, quantite, q, p);
+			Produit nouveau(article,description, q, p);
 			easystock.ajouterUnProduit(nouveau);
 		}
 

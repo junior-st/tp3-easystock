@@ -14,9 +14,11 @@ bool Magasin::ajouterUnProduit(const Produit& p1) {
 
 void Magasin::produitRefenceMagasin() const
 {
-
+	std::cout << "_______________________________________________________________________________________________________" << std::endl;
 	for (auto p : produit_) {
+		
 		std::cout << p << std::endl;
+		std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
 	}
 }
 
