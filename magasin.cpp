@@ -4,7 +4,8 @@
 
 Magasin::Magasin(std::vector<Produit> produit, std::vector<Client> clients, std::vector<Commande> commandes):
 	produit_(produit),clients_(clients),commandes_(commandes)
-{//rien a faire ici :)
+{
+	//rien a faire ici :)
 }
 
 bool Magasin::ajouterUnProduit(const Produit& p1) {

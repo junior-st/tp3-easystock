@@ -6,27 +6,29 @@
 #include <limits>
 #include <fstream>
 #include <sstream>
+#include "helper.h"
 int main() {
-//creation de produits
-	/*Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
-	Produit gel("gel nivea", "gel de nettoyage masculin ", 30, 5.55);
-	Produit pain("pain", "un pain ideale pour la croissance", 25, 1.30);
-	Produit lait("lait", "lait caille Nido", 75, 1.10);
-	Produit savon("savon de marseille", "savon tout usage", 20, 0.5);
-	Produit jouet("voiture", "voiture pat patrouille", 40, 45.0);
-	Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);*/
+	//creation de produits
+		/*Produit biscuit("biscuit", "biscuits au chocolat fourre", 10, 0.90);
+		Produit gel("gel nivea", "gel de nettoyage masculin ", 30, 5.55);
+		Produit pain("pain", "un pain ideale pour la croissance", 25, 1.30);
+		Produit lait("lait", "lait caille Nido", 75, 1.10);
+		Produit savon("savon de marseille", "savon tout usage", 20, 0.5);
+		Produit jouet("voiture", "voiture pat patrouille", 40, 45.0);
+		Produit chocolat("nutella", "chocolat a base de cacao et d'huile vegetale", 50, 6.99);*/
 	std::vector<Produit> produits = {};
 	//lecture des fichiers csv brick by brick
-	
+
 	//creation de client 
-	/*Client client1("chakoutio", "junior", 0);
+	Client client1("chakoutio", "junior", 0);
 	Client client2("nguewo", "rose", 1);
 	Client client3("nanmegni", "Alain", 2);
 	Client client4("keti", "sorelle", 3);
-	Client client5("tonfeu", "styve", 0);*/
-	std::vector<Client> clients = {};
+	Client client5("tonfeu", "styve", 0);
+	std::vector<Client> clients = { client1 };
 	//creation d'un vector de commande vide ;
 	std::vector<Commande> commandes = {};
+	//creation de mo magasin
 	Magasin easystock(produits, clients, commandes);
 	std::ifstream file;
 	file.open("produit.csv");
@@ -44,12 +46,34 @@ int main() {
 			std::getline(ss, prix, ',');
 			int q = std::stoi(quantite);
 			double p = std::stod(prix);
-			Produit nouveau(article,description, q, p);
+			Produit nouveau(article, description, q, p);
 			easystock.ajouterUnProduit(nouveau);
 		}
 
 		file.close();
 	}
+	/*file.open("client.csv");
+	if (file.is_open()) {
+		std::string nom;
+		std::string prenom;
+		std::string identififiant;
+		std::string ligne;
+		std::getline(file, ligne);
+		while (std::getline(file, ligne)) {
+			std::stringstream ss(ligne);
+			std::getline(ss, nom, ',');
+			std::getline(ss, prenom, ',');
+			std::getline(ss, identififiant);
+			int id = std::stoi(identififiant);
+			Client client(nom, prenom, id);
+			easystock.ajouterClient(client);
+		}
+		file.close();
+
+
+
+	}*/
+	chargement_fichier_client("client.csv", easystock);
 
 	std::cout<<"====================================" << std::endl;
 	std::cout << "       Menu gestion de magasin      " << std::endl;
@@ -130,6 +154,7 @@ int main() {
 		std::cout << "entrez une numero d'action valide ): \n";
 		std::cout << "entrez a nouveau le numero de l'action que vous souhaitez realiser : ";
 	}
+	easystock.afficherLesClient();
 
 	return 0;
 }

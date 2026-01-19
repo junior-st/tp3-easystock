@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="commande.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="magasin.h" />
     <ClInclude Include="produit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
     <ClCompile Include="commande.cpp" />
+    <ClCompile Include="helper.cpp" />
     <ClCompile Include="magasin.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="produit.cpp" />
