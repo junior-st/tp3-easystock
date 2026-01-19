@@ -84,6 +84,7 @@ int main() {
 	std::cout << "entrez le numero de l'action que vous souhaitez realiser : ";
 	int p;
 	std::cin >> p;
+
 	if (p == 1) {
 		std::cout << "1-ajouter un produit " << std::endl;;
 		std::cout << "2-affichages des produits "<<std::endl;
@@ -92,6 +93,7 @@ int main() {
 		std::cout << "====================================" << std::endl;
 		int x;
 		std::cin >> x;
+
 		if (x == 2) {
 			easystock.produitRefenceMagasin();
 		}
@@ -110,16 +112,30 @@ int main() {
 				std::cout << "entrez le prix unitaire  " << std::endl;
 				double prix;
 				std::cin >> prix;
-				Produit nouveau_produit(nom_produit, description, stock, prix);
-				easystock.ajouterUnProduit(nouveau_produit);
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				//Produit nouveau_produit(nom_produit, description, stock, prix);
+				//easystock.ajouterUnProduit(nouveau_produit);
+				std::ofstream file;
+				file.open("produit.csv", std::ios::app);
+				if (file.is_open()) {
+					file << nom_produit;
+					file << ",";
+					file << description;
+					file << ",";
+					file << stock;
+					file << ",";
+					file << prix << std::endl;
+				}
+				file.close();
+				produits = {};
+				chargement_fichier_produit("produit.csv", easystock);
+				easystock.produitRefenceMagasin();
 
 
 			}
 			catch (const std::invalid_argument& e) {
 				std::cerr << " erreur de creation du produit:" << e.what() << std::endl;
 			}
-			
-			easystock.produitRefenceMagasin();
 		}
 		else if (x==3){
 			std::cout << "quelle produit souhaiter vous mettre la quantite a jour" << std::endl;
@@ -154,7 +170,6 @@ int main() {
 		std::cout << "entrez une numero d'action valide ): \n";
 		std::cout << "entrez a nouveau le numero de l'action que vous souhaitez realiser : ";
 	}
-	easystock.afficherLesClient();
 
 	return 0;
 }
